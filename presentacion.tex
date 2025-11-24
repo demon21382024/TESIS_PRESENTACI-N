@@ -1,0 +1,160 @@
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% ==============================
+%     TEMAS Y PAQUETES
+% ==============================
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Quitar barra inferior de navegación
+\setbeamertemplate{navigation symbols}{}
+
+% ==============================
+%     DATOS DE LA PRESENTACIÓN
+% ==============================
+
+\title[Re-ID Autosupervisado]{\textbf{Reidentificación de Personas Aplicando Aprendizaje Autosupervisado}}
+\author[H. Canto, J. Torres]{Harold Canto \\ Juan Torres \\[0.2cm]
+\small Asesor: Edward Jorge Yuri Cayllahua Cahuina}
+\institute[UTEC]{Universidad de Ingeniería y Tecnología (UTEC)}
+\date{2025}
+
+% ==============================
+%             DOCUMENTO
+% ==============================
+
+\begin{document}
+
+% TÍTULO
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% ==============================
+%        SLIDE 1: TEMA
+% ==============================
+
+\begin{frame}{Tema}
+Reidentificación de personas aplicando aprendizaje autosupervisado.
+\end{frame}
+
+% ==============================
+%        SLIDE 2: ÍNDICE
+% ==============================
+
+\begin{frame}{Índice}
+\begin{enumerate}
+    \item Motivación
+    \item Problema Computacional
+    \item Justificación
+    \item Objetivo General y Específicos
+    \item Referencias
+\end{enumerate}
+\end{frame}
+
+% ==============================
+%        SLIDE 3: MOTIVACIÓN
+% ==============================
+
+\begin{frame}{Motivación}
+\begin{itemize}
+    \item Person Re-ID identifica personas en distintas cámaras sin depender del rostro.
+    \item Métodos supervisados: alto rendimiento, pero requieren mucho etiquetado manual.
+    \item PersonViT: robusto contra oclusiones (MIM + DINO + ViT), pero computacionalmente costoso.
+    \item ISR: aprendizaje autosupervisado con pares inter-frame y contraste (sin etiquetas).
+    \item El autosupervisado permite reducir costos de anotación y mejorar generalización.
+\end{itemize}
+
+\footnotesize Fuente: Person Re-Identification - an overview | ScienceDirect Topics
+\end{frame}
+
+% ==============================
+%    SLIDE 4: PROBLEMA COMPUTACIONAL
+% ==============================
+
+\begin{frame}{Problema Computacional}
+¿Cómo lograr que el aprendizaje autosupervisado aprenda
+representaciones de identidad en datos no etiquetados que funcionen
+entre distintas cámaras y condiciones (iluminación, pose, oclusión),
+logrando un rendimiento comparable al supervisado y con menor costo
+computacional?
+\end{frame}
+
+% ==============================
+%         SLIDE 5: JUSTIFICACIÓN
+% ==============================
+
+\begin{frame}{Justificación}
+
+\textbf{Técnica:}
+\begin{itemize}
+    \item El aprendizaje supervisado requiere grandes datasets etiquetados.
+    \item Los métodos autosupervisados (ISR, PersonViT) han mostrado
+    resultados competitivos.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Práctica:}
+\begin{itemize}
+    \item Reduce costos operativos.
+    \item Es escalable para sistemas de vigilancia real.
+    \item Útil en escenarios urbanos con múltiples cámaras.
+\end{itemize}
+\end{frame}
+
+% ==============================
+%     SLIDE 6: OBJETIVO GENERAL
+% ==============================
+
+\begin{frame}{Objetivo General}
+Proponer un método autosupervisado para reidentificación de personas,
+evaluando su capacidad de reducir la dependencia de datos etiquetados y
+mejorar la generalización en condiciones reales.
+\end{frame}
+
+% ==============================
+%   SLIDE 7: OBJETIVOS ESPECÍFICOS
+% ==============================
+
+\begin{frame}{Objetivos Específicos}
+\begin{itemize}
+    \item Seleccionar datasets adecuados para entrenamiento y evaluación.
+    \item Definir métricas relevantes: Rank-1, mAP.
+    \item Explorar técnicas autosupervisadas aplicables a Re-ID.
+    \item Comparar el enfoque autosupervisado con métodos supervisados.
+    \item Evaluar escalabilidad y desafíos prácticos.
+\end{itemize}
+\end{frame}
+
+% ==============================
+%         SLIDE 8: REFERENCIAS
+% ==============================
+
+\begin{frame}{Referencias}
+\footnotesize
+\begin{itemize}
+    \item C. Joshua et al., “Using optical flow consistency for self-supervised person Re-ID”, 2025.
+    \item X. Liu et al., “UCM-VeID V2: Multi-View End-to-End Re-ID”, CVPR 2025.
+    \item M. Varenyk et al., “Self-supervised low-FPS tracking for Re-ID”, 2025.
+    \item H. Rao et al., “Self-supervised gait encoding for Re-ID”, IJCAI 2020.
+    \item Z. Dou et al., “Identity-seeking self-supervised Re-ID”, ICCV 2023.
+\end{itemize}
+\end{frame}
+
+% ==============================
+%              FINAL
+% ==============================
+
+\begin{frame}
+    \centering\Huge Gracias
+\end{frame}
+
+\end{document}
