@@ -1,0 +1,23 @@
+# Archivos temporales de LaTeX
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+
+# Archivos PDF compilados
+*.pdf
+
+# Carpetas del sistema
+.DS_Store
+Thumbs.db

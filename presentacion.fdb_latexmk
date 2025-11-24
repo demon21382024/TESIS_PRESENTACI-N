@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1764008638.14717 "c:/PRESENTACION TESIS/presentacion.tex" "presentacion.pdf" "presentacion" 1764008639.57001 0
+["pdflatex"] 1764008743.16084 "c:/PRESENTACION TESIS/presentacion.tex" "presentacion.pdf" "presentacion" 1764008744.43378 0
   "C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1764007667 82686 2381c3433487640bf26aa76a10db7eb2 ""
   "C:/Users/User/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecss0600.pk" 1764008588 12340 843bbf6fad54c5df45ba24bacc7338d8 ""
   "C:/Users/User/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecss0800.pk" 1764007671 15956 ba798ba2fddb92dad6caab3c63ab49fd ""
@@ -186,13 +186,13 @@
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/translator/translator.sty" 1622471510 8765 56d370785f0143111ff9898b5adfe08e ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/PRESENTACION TESIS/presentacion.tex" 1764008637 4770 a2b17142cbff06b05bad8d200c0dd3bc ""
+  "c:/PRESENTACION TESIS/presentacion.tex" 1764008742 4788 6ff0b8a55bfb126493a4dac93c8e8a1a ""
   "pipeline.jpeg" 1764008056 97580 4639c26e7e8dc49c76923cc49dac416d ""
-  "presentacion.aux" 1764008639 3428 b634d8b768ea9785cdf3f127d098737a "pdflatex"
-  "presentacion.nav" 1764008639 2078 ceac664d0f6e4a03d3d212a6d4360123 "pdflatex"
-  "presentacion.out" 1764008639 703 dfc18593e55587ead9e5cdf33cd2b5fe "pdflatex"
-  "presentacion.tex" 1764008637 4770 a2b17142cbff06b05bad8d200c0dd3bc ""
-  "presentacion.toc" 1764008639 305 35746a5d0bba5f97ef2a3d8b4bfcb0a1 "pdflatex"
+  "presentacion.aux" 1764008744 3428 b634d8b768ea9785cdf3f127d098737a "pdflatex"
+  "presentacion.nav" 1764008744 2078 ceac664d0f6e4a03d3d212a6d4360123 "pdflatex"
+  "presentacion.out" 1764008744 703 dfc18593e55587ead9e5cdf33cd2b5fe "pdflatex"
+  "presentacion.tex" 1764008742 4788 6ff0b8a55bfb126493a4dac93c8e8a1a ""
+  "presentacion.toc" 1764008744 305 35746a5d0bba5f97ef2a3d8b4bfcb0a1 "pdflatex"
   (generated)
   "presentacion.aux"
   "presentacion.log"
