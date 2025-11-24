@@ -15,9 +15,6 @@
 *.snm
 *.vrb
 
-# Archivos PDF compilados
-*.pdf
-
 # Carpetas del sistema
 .DS_Store
 Thumbs.db
