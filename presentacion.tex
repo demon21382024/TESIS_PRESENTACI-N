@@ -1,4 +1,4 @@
-\documentclass[10pt,aspectratio=169]{beamer}
+\documentclass[12pt,aspectratio=169]{beamer}
 
 % ==============================
 %     TEMAS Y PAQUETES
@@ -38,66 +38,56 @@
 \end{frame}
 
 % ==============================
-%        SLIDE 1: TEMA
+%     SLIDE CONTENIDO (ÍNDICE)
 % ==============================
 
-\begin{frame}{Tema}
-Reidentificación de personas aplicando aprendizaje autosupervisado.
+\begin{frame}{Contenido}
+    \tableofcontents
 \end{frame}
 
 % ==============================
-%        SLIDE 2: ÍNDICE
+%           SECCION 1
 % ==============================
 
-\begin{frame}{Índice}
-\begin{enumerate}
-    \item Motivación
-    \item Problema Computacional
-    \item Justificación
-    \item Objetivo General y Específicos
-    \item Referencias
-\end{enumerate}
-\end{frame}
-
-% ==============================
-%        SLIDE 3: MOTIVACIÓN
-% ==============================
+\section{Motivación}
 
 \begin{frame}{Motivación}
 \begin{itemize}
-    \item Person Re-ID identifica personas en distintas cámaras sin depender del rostro.
-    \item Métodos supervisados: alto rendimiento, pero requieren mucho etiquetado manual.
-    \item PersonViT: robusto contra oclusiones (MIM + DINO + ViT), pero computacionalmente costoso.
-    \item ISR: aprendizaje autosupervisado con pares inter-frame y contraste (sin etiquetas).
-    \item El autosupervisado permite reducir costos de anotación y mejorar generalización.
+    \item Person Re-ID identifica personas entre cámaras sin depender del rostro.
+    \item Supervisado: excelente rendimiento, alto costo de etiquetado.
+    \item PersonViT: robusto a oclusiones pero muy costoso computacionalmente.
+    \item ISR: autosupervisado con contraste inter-frames (sin etiquetas).
+    \item Autosupervisado reduce costos y mejora generalización.
 \end{itemize}
 
 \footnotesize Fuente: Person Re-Identification - an overview | ScienceDirect Topics
 \end{frame}
 
 % ==============================
-%    SLIDE 4: PROBLEMA COMPUTACIONAL
+%           SECCION 2
 % ==============================
 
+\section{Problema Computacional}
+
 \begin{frame}{Problema Computacional}
-¿Cómo lograr que el aprendizaje autosupervisado aprenda
-representaciones de identidad en datos no etiquetados que funcionen
-entre distintas cámaras y condiciones (iluminación, pose, oclusión),
-logrando un rendimiento comparable al supervisado y con menor costo
-computacional?
+¿Cómo lograr que el aprendizaje autosupervisado aprenda representaciones
+de identidad en datos no etiquetados que funcionen en distintas cámaras,
+condiciones de iluminación, pose y oclusión, alcanzando rendimiento 
+cercano al supervisado pero con menor costo computacional?
 \end{frame}
 
 % ==============================
-%         SLIDE 5: JUSTIFICACIÓN
+%           SECCION 3
 % ==============================
+
+\section{Justificación}
 
 \begin{frame}{Justificación}
 
 \textbf{Técnica:}
 \begin{itemize}
-    \item El aprendizaje supervisado requiere grandes datasets etiquetados.
-    \item Los métodos autosupervisados (ISR, PersonViT) han mostrado
-    resultados competitivos.
+    \item El supervisado requiere grandes datasets etiquetados.
+    \item Técnicas autosupervisadas han demostrado resultados competitivos.
 \end{itemize}
 
 \vspace{0.3cm}
@@ -105,38 +95,53 @@ computacional?
 \textbf{Práctica:}
 \begin{itemize}
     \item Reduce costos operativos.
-    \item Es escalable para sistemas de vigilancia real.
-    \item Útil en escenarios urbanos con múltiples cámaras.
+    \item Escalable para vigilancia real en entornos urbanos.
+    \item Menor dependencia de anotaciones manuales.
 \end{itemize}
+
 \end{frame}
 
 % ==============================
-%     SLIDE 6: OBJETIVO GENERAL
+%           SECCION 4
 % ==============================
+
+\section{Objetivos}
 
 \begin{frame}{Objetivo General}
 Proponer un método autosupervisado para reidentificación de personas,
-evaluando su capacidad de reducir la dependencia de datos etiquetados y
+evaluando su capacidad de reducir dependencia de datos etiquetados y
 mejorar la generalización en condiciones reales.
 \end{frame}
-
-% ==============================
-%   SLIDE 7: OBJETIVOS ESPECÍFICOS
-% ==============================
 
 \begin{frame}{Objetivos Específicos}
 \begin{itemize}
     \item Seleccionar datasets adecuados para entrenamiento y evaluación.
     \item Definir métricas relevantes: Rank-1, mAP.
     \item Explorar técnicas autosupervisadas aplicables a Re-ID.
-    \item Comparar el enfoque autosupervisado con métodos supervisados.
+    \item Comparar enfoque autosupervisado vs supervisado.
     \item Evaluar escalabilidad y desafíos prácticos.
 \end{itemize}
 \end{frame}
 
 % ==============================
-%         SLIDE 8: REFERENCIAS
+%     SLIDE: PIPELINE
 % ==============================
+
+\section{Pipeline Metodológico}
+
+\begin{frame}{Pipeline Metodológico}
+\centering
+\includegraphics[width=0.42\textwidth]{pipeline.jpeg}
+
+\vspace{0.3cm}
+{\footnotesize \textbf{Fuente:} Elaboración propia.}
+\end{frame}
+
+% ==============================
+%           SECCION 5
+% ==============================
+
+\section{Referencias}
 
 \begin{frame}{Referencias}
 \footnotesize
