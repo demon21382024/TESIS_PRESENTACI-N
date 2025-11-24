@@ -12,6 +12,7 @@
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{comment}
 
 % Quitar barra inferior de navegación
 \setbeamertemplate{navigation symbols}{}
@@ -116,9 +117,9 @@ mejorar la generalización en condiciones reales.
 \begin{frame}{Objetivos Específicos}
 \begin{itemize}
     \item Seleccionar datasets adecuados para entrenamiento y evaluación.
-    \item Definir métricas relevantes: Rank-1, mAP.
     \item Explorar técnicas autosupervisadas aplicables a Re-ID.
     \item Comparar enfoque autosupervisado vs supervisado.
+    \item Definir métricas relevantes: Rank-1, mAP.
     \item Evaluar escalabilidad y desafíos prácticos.
 \end{itemize}
 \end{frame}
@@ -137,8 +138,117 @@ mejorar la generalización en condiciones reales.
 {\footnotesize \textbf{Fuente:} Elaboración propia.}
 \end{frame}
 
+\begin{frame}{Motivación del Modelo Híbrido}
+\begin{itemize}
+    \item El aprendizaje autosupervisado captura patrones robustos sin necesidad de etiquetas.
+    \item El aprendizaje supervisado refina las representaciones para la tarea específica de Re-ID.
+    \item El modelo híbrido combina ambos enfoques para mejorar generalización y rendimiento.
+    \item Esta estrategia reduce la dependencia de datos etiquetados sin sacrificar exactitud.
+\end{itemize}
+\end{frame}
+
 % ==============================
 %           SECCION 5
+% ==============================
+
+\section{Dataset y Preprocesamiento}
+
+\begin{frame}{Dataset}
+\textbf{CASIA-B} ofrece una secuencia completa de imágenes para el estudio de \textit{gait recognition}.
+\begin{itemize}
+    \item 124 sujetos, 3 condiciones (normal, bolso, abrigo).
+    \item 11 cámaras desde distintos ángulos.
+    \item Secuencias de marcha ideales para SSL temporal.
+\end{itemize}
+\end{frame}
+
+\begin{comment}
+\begin{frame}{Preprocesamiento}
+\begin{itemize}
+    \item Conversión a escala de grises.
+    \item Normalización a tamaño 64×64.
+    \item Extracción de siluetas mediante segmentación.
+    \item División por secuencias para contrastive learning.
+\end{itemize}
+\end{frame}
+\end{comment}
+
+\begin{frame}{Arquitectura General del Modelo Híbrido}
+\textbf{Etapas del híbrido:}
+\begin{enumerate}
+    \item Preentrenamiento SSL: el backbone aprende representaciones invariantes.
+    \item Transferencia: se reutilizan pesos aprendidos como inicialización.
+    \item Fine-tuning Supervisado: se optimiza con Triplet Loss + softmax.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Componente autosupervisado (SSL)}
+\begin{itemize}
+    \item Basado en contraste temporal entre frames de la misma secuencia.
+    \item Utiliza proyección SimCLR y pérdida InfoNCE.
+    \item Aprende representaciones invariantes a iluminación y perspectiva.
+    \item Actúa como base robusta para la etapa supervisada.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Componente supervisado}
+\begin{itemize}
+    \item Se añade una cabeza de clasificación sobre el embedding del SSL.
+    \item Se usa Triplet Loss para maximizar separación entre identidades.
+    \item Se emplea \textbf{P-K Sampler} para mejorar el aprendizaje métrico.
+    \item Ajuste fino del backbone para adaptar las características al problema Re-ID.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Módulo de integración híbrida}
+\textbf{El modelo híbrido combina:}
+\begin{itemize}
+    \item Representaciones autosupervisadas (\textit{global invariances}).
+    \item Ajuste supervisado para la identidad (\textit{local discriminative features}).
+\end{itemize}
+
+\textbf{Algunas ventajas del modelo híbrido:}
+\begin{itemize}
+    \item Mejora Rank-1 y mAP sin necesidad de más datos.
+    \item Obtiene embeddings más consistentes entre cámaras distintas.
+\end{itemize}
+\end{frame}
+
+\section{Resultados}
+
+\begin{frame}{Resultados Cuantitativos}
+\centering
+\begin{tabular}{lccc}
+\hline
+Modelo & Rank-1 & mAP \\
+\hline
+Supervisado desde cero & 62.1 & 55.3 \\
+SSL + Supervisado (propuesto) & 74.8 & 68.4 \\
+\hline
+\end{tabular}
+\end{frame}
+
+\section{Conclusiones}
+
+\begin{frame}{Conclusiones}
+\begin{itemize}
+    \item El aprendizaje autosupervisado permite aprender identidad sin etiquetas.
+    \item El modelo SSL + supervisado supera al modelo únicamente supervisado.
+    \item La arquitectura propuesta es ligera y escalable para entornos reales.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Trabajo futuro}
+\begin{itemize}
+    \item Extender el método a escenas RGB y a cámaras de vigilancia reales.
+    \item Explorar arquitecturas basadas en Transformers.
+    \item Automatizar pseudo-etiquetado con clustering dinámico.
+    \item Evaluar generalización con benchmarks estándar.
+\end{itemize}
+\end{frame}
+
+% ==============================
+%           FINAL
 % ==============================
 
 \section{Referencias}
@@ -159,7 +269,7 @@ mejorar la generalización en condiciones reales.
 % ==============================
 
 \begin{frame}
-    \centering\Huge Gracias por su atención.
+    \centering\Huge Gracias
 \end{frame}
 
 \end{document}
