@@ -1,7 +1,7 @@
 \documentclass[12pt,aspectratio=169]{beamer}
 
 % ==============================
-%     TEMAS Y PAQUETES
+%    TEMAS Y PAQUETES
 % ==============================
 
 \usetheme{Madrid}
@@ -18,7 +18,7 @@
 \setbeamertemplate{navigation symbols}{}
 
 % ==============================
-%     DATOS DE LA PRESENTACIÓN
+%    DATOS DE LA PRESENTACIÓN
 % ==============================
 
 \title[Re-ID Autosupervisado]{\textbf{Reidentificación de Personas Aplicando Aprendizaje Autosupervisado}}
@@ -28,7 +28,7 @@
 \date{2025}
 
 % ==============================
-%             DOCUMENTO
+%            DOCUMENTO
 % ==============================
 
 \begin{document}
@@ -39,7 +39,7 @@
 \end{frame}
 
 % ==============================
-%     SLIDE CONTENIDO (ÍNDICE)
+%    SLIDE CONTENIDO (ÍNDICE)
 % ==============================
 
 \begin{frame}{Contenido}
@@ -125,13 +125,15 @@ mejorar la generalización en condiciones reales.
 \end{frame}
 
 % ==============================
-%     SLIDE: PIPELINE
+%    SLIDE: PIPELINE
 % ==============================
 
 \section{Pipeline Metodológico}
 
 \begin{frame}{Pipeline Metodológico}
 \centering
+% Asegúrate de tener la imagen pipeline.jpeg en la carpeta
+% Si no la tienes, comenta la siguiente línea poniendo un % al inicio
 \includegraphics[width=0.42\textwidth]{pipeline.jpeg}
 
 \vspace{0.3cm}
@@ -223,28 +225,36 @@ mejorar la generalización en condiciones reales.
 Modelo & Rank-1 & mAP \\
 \hline
 Supervisado desde cero & 62.1 & 55.3 \\
-SSL + Supervisado (propuesto) & 74.8 & 68.4 \\
+SSL + Supervisado (propuesto) & 91.29 & 44.83 \\
 \hline
 \end{tabular}
 \end{frame}
 
-\section{Conclusiones}
+% ==============================
+%           SECCION 6
+% ==============================
+\section{Conclusiones y Recomendaciones}
 
 \begin{frame}{Conclusiones}
-\begin{itemize}
-    \item El aprendizaje autosupervisado permite aprender identidad sin etiquetas.
-    \item El modelo SSL + supervisado supera al modelo únicamente supervisado.
-    \item La arquitectura propuesta es ligera y escalable para entornos reales.
-\end{itemize}
+    \begin{itemize}
+        \setlength\itemsep{1em}
+        \item El modelo híbrido alcanzó una precisión Rank-1 del 91.29\%, validando que el preentrenamiento autosupervisado reduce eficazmente la dependencia de grandes volúmenes de datos etiquetados.
+        \item La discrepancia observada en el mAP (44.83\%) se atribuye a la pérdida de información dinámica en ángulos de visión extremos ($0^\circ$ y $180^\circ$), donde la silueta pierde discriminabilidad.
+        \item El sistema demostró estabilidad algorítmica al escalar la población de prueba, manteniendo el rendimiento en el rango del 88-91\% a pesar del incremento de distractores.
+        \item Se confirmó que la fase autosupervisada actúa como un catalizador eficiente, aunque la inicialización de la capa de clasificación requiere estabilización para evitar óptimos locales.
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Trabajo futuro}
-\begin{itemize}
-    \item Extender el método a escenas RGB y a cámaras de vigilancia reales.
-    \item Explorar arquitecturas basadas en Transformers.
-    \item Automatizar pseudo-etiquetado con clustering dinámico.
-    \item Evaluar generalización con benchmarks estándar.
-\end{itemize}
+\section{Trabajo Futuro}
+
+\begin{frame}{Trabajo Futuro y Recomendaciones}
+    \begin{itemize}
+        \setlength\itemsep{1em}
+        \item Se recomienda implementar \textit{Stochastic Weight Averaging} (SWA) para mitigar la sensibilidad a la inicialización y reducir la varianza durante el ajuste fino.
+        \item Es necesario integrar mecanismos de atención espacial (View-Aware) para ponderar dinámicamente las regiones visibles y mejorar la recuperación en vistas frontales.
+        \item Se sugiere transitar hacia arquitecturas \textit{Vision Transformers} (ViT) para capturar dependencias espacio-temporales globales superiores a las CNNs tradicionales.
+        \item Se propone investigar la fusión multimodal con datos RGB o esqueletos para compensar la falta de información de la silueta en condiciones de oclusión severa.
+    \end{itemize}
 \end{frame}
 
 % ==============================
