@@ -21,7 +21,7 @@
 %    DATOS DE LA PRESENTACIÓN
 % ==============================
 
-\title[Re-ID Autosupervisado]{\textbf{Reidentificación de Personas Aplicando Aprendizaje Autosupervisado}}
+\title[Re-ID Autosupervisado]{\textbf{Reidentificación de Personas basado en reconocimiento de marcha}}
 \author[H. Canto, J. Torres]{Harold Canto \\ Juan Torres \\[0.2cm]
 \small Asesor: Edward Jorge Yuri Cayllahua Cahuina}
 \institute[UTEC]{Universidad de Ingeniería y Tecnología (UTEC)}
@@ -54,13 +54,11 @@
 
 \begin{frame}{Motivación}
 \begin{itemize}
-    \item Person Re-ID identifica personas entre cámaras sin depender del rostro.
-    \item Supervisado: excelente rendimiento, alto costo de etiquetado.
-    \item PersonViT: robusto a oclusiones pero muy costoso computacionalmente.
-    \item ISR: autosupervisado con contraste inter-frames (sin etiquetas).
-    \item Autosupervisado reduce costos y mejora generalización.
+  \item Person Re-ID busca identificación entre cámaras sin depender solo del rostro.
+  \item Los métodos supervisados alcanzan alto rendimiento pero requieren costosos conjuntos etiquetados.
+  \item Métodos autosupervisados basados en consistencia temporal o pares frame/tracklet pueden aprender invariancias útiles sin etiquetas.
+  \item Un enfoque híbrido puede aprovechar lo mejor de ambos mundos.
 \end{itemize}
-
 \footnotesize Fuente: Person Re-Identification - an overview | ScienceDirect Topics
 \end{frame}
 
@@ -71,10 +69,7 @@
 \section{Problema Computacional}
 
 \begin{frame}{Problema Computacional}
-¿Cómo lograr que el aprendizaje autosupervisado aprenda representaciones
-de identidad en datos no etiquetados que funcionen en distintas cámaras,
-condiciones de iluminación, pose y oclusión, alcanzando rendimiento 
-cercano al supervisado pero con menor costo computacional?
+¿Cómo lograr que el aprendizaje autosupervisado capture representaciones de identidad en secuencias de marcha no etiquetadas, que sean robustas, y que al combinarse con ajuste fino supervisado alcancen rendimiento competitivo con menores costos de etiquetado y recursos?
 \end{frame}
 
 % ==============================
@@ -87,8 +82,8 @@ cercano al supervisado pero con menor costo computacional?
 
 \textbf{Técnica:}
 \begin{itemize}
-    \item El supervisado requiere grandes datasets etiquetados.
-    \item Técnicas autosupervisadas han demostrado resultados competitivos.
+    \item El supervisado necesita etiquetas y el SSL aprovecha grandes volúmenes no etiquetados.
+  \item Un preentrenamiento SSL adecuado puede mejorar la generalización entre cámaras.
 \end{itemize}
 
 \vspace{0.3cm}
@@ -97,7 +92,7 @@ cercano al supervisado pero con menor costo computacional?
 \begin{itemize}
     \item Reduce costos operativos.
     \item Escalable para vigilancia real en entornos urbanos.
-    \item Menor dependencia de anotaciones manuales.
+    \item Mejora robustez en condiciones de baja resolución.
 \end{itemize}
 
 \end{frame}
@@ -109,18 +104,15 @@ cercano al supervisado pero con menor costo computacional?
 \section{Objetivos}
 
 \begin{frame}{Objetivo General}
-Proponer un método autosupervisado para reidentificación de personas,
-evaluando su capacidad de reducir dependencia de datos etiquetados y
-mejorar la generalización en condiciones reales.
+Desarrollar y evaluar un método híbrido para Re-ID basado en gait, que reduzca la dependencia de datos etiquetados y mejore la generalización en condiciones reales.
 \end{frame}
 
 \begin{frame}{Objetivos Específicos}
 \begin{itemize}
-    \item Seleccionar datasets adecuados para entrenamiento y evaluación.
-    \item Explorar técnicas autosupervisadas aplicables a Re-ID.
-    \item Comparar enfoque autosupervisado vs supervisado.
-    \item Definir métricas relevantes: Rank-1, mAP.
-    \item Evaluar escalabilidad y desafíos prácticos.
+  \item Seleccionar datasets y protocolo.
+  \item Diseñar un pretext-task SSL orientado a secuencias de marcha.
+  \item Implementar fine-tuning con pérdidas métricas (Triplet) y clasificación (CrossEntropy).
+  \item Evaluar con métricas según estado del arte.
 \end{itemize}
 \end{frame}
 
@@ -134,10 +126,16 @@ mejorar la generalización en condiciones reales.
 \centering
 % Asegúrate de tener la imagen pipeline.jpeg en la carpeta
 % Si no la tienes, comenta la siguiente línea poniendo un % al inicio
-\includegraphics[width=0.42\textwidth]{pipeline.jpeg}
+%\includegraphics[width=0.42\textwidth]{pipeline.jpeg}
+%\vspace{0.3cm}
+%{\footnotesize \textbf{Fuente:} Elaboración propia.}
 
-\vspace{0.3cm}
-{\footnotesize \textbf{Fuente:} Elaboración propia.}
+\begin{itemize}
+  \item Fase I: Preentrenamiento SSL (pares temporales / augmentaciones).
+  \item Fase II: Transferencia y fine-tuning supervisado (PK Sampler, Triplet, CrossEntropy).
+  \item Evaluación bajo Rank-1 y mAP, junto con pruebas de escalabilidad por data.
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}{Motivación del Modelo Híbrido}
@@ -145,7 +143,7 @@ mejorar la generalización en condiciones reales.
     \item El aprendizaje autosupervisado captura patrones robustos sin necesidad de etiquetas.
     \item El aprendizaje supervisado refina las representaciones para la tarea específica de Re-ID.
     \item El modelo híbrido combina ambos enfoques para mejorar generalización y rendimiento.
-    \item Esta estrategia reduce la dependencia de datos etiquetados sin sacrificar exactitud.
+    \item Esta estrategia reduciría la dependencia de datos etiquetados sin sacrificar exactitud.
 \end{itemize}
 \end{frame}
 
@@ -158,38 +156,34 @@ mejorar la generalización en condiciones reales.
 \begin{frame}{Dataset}
 \textbf{CASIA-B} ofrece una secuencia completa de imágenes para el estudio de \textit{gait recognition}.
 \begin{itemize}
-    \item 124 sujetos, 3 condiciones (normal, bolso, abrigo).
-    \item 11 cámaras desde distintos ángulos.
-    \item Secuencias de marcha ideales para SSL temporal.
+    \item 124 sujetos, 3 condiciones (normal, bolso y abrigo).
+    \item Capturas desde 11 vistas angulares entre 0° y 180°.
+    \item Adecuado para secuencias de marcha y SSL temporal.
 \end{itemize}
 \end{frame}
 
-\begin{comment}
 \begin{frame}{Preprocesamiento}
 \begin{itemize}
-    \item Conversión a escala de grises.
-    \item Normalización a tamaño 64×64.
-    \item Extracción de siluetas mediante segmentación.
-    \item División por secuencias para contrastive learning.
+    \item Conversión a escala de grises; normalización de píxeles a [0,1].
+    \item Estandarización a size de 64×64.
+    \item Augmentaciones para SSL: recorte, rotación leve, flip horizontal, cambios leves de brillo/contraste.
 \end{itemize}
 \end{frame}
-\end{comment}
 
 \begin{frame}{Arquitectura General del Modelo Híbrido}
 \textbf{Etapas del híbrido:}
 \begin{enumerate}
-    \item Preentrenamiento SSL: el backbone aprende representaciones invariantes.
-    \item Transferencia: se reutilizan pesos aprendidos como inicialización.
-    \item Fine-tuning Supervisado: se optimiza con Triplet Loss + softmax.
+  \item Pre-entrenamiento SSL: backbone CNN aprende representaciones temporales.
+  \item Transferencia: pesos de SSL como inicialización del backbone.
+  \item Fine-tuning supervisado: cabeza de clasificación + cabeza métrica (normalizada), optimizadas con CrossEntropy + Triplet Loss.
 \end{enumerate}
 \end{frame}
 
 \begin{frame}{Componente autosupervisado (SSL)}
 \begin{itemize}
     \item Basado en contraste temporal entre frames de la misma secuencia.
-    \item Utiliza proyección SimCLR y pérdida InfoNCE.
-    \item Aprende representaciones invariantes a iluminación y perspectiva.
-    \item Actúa como base robusta para la etapa supervisada.
+    \item Utiliza proyección SimCLR y pérdida InfoNCE para pares temporales.
+    \item Augmentaciones aplicadas solo durante preentrenamiento SSL.
 \end{itemize}
 \end{frame}
 
